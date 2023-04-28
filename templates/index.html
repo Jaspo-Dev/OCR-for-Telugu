@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telugu</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        .image {
+            height: 400px;
+            background-color: #aaa;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="p-5 bg-primary text-white text-center">
+        <h1>Optical Character Recognition for Telugu</h1>
+    </div>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-5">
+                <form action="/image_upload" method="POST" enctype="multipart/form-data">
+                    <h2 class="text-center">Image Upload</h2>
+                    <div class="image text-center" id="id_image">
+                        {% if file != False %}
+                        <img src="{{ url_for('', filename=file) }}" alt="" id="id_iamge_area" class="image">
+                        {% else %}
+                        <img src="" alt="" id="id_img_area" class="image">
+                        {% endif %}
+                        <div class="hidden">
+                            <input type="file" name="file" id="id_file">
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-success">SUBMIT</button>
+                    </div>
+                </form>
+
+                <hr class="d-sm-none">
+            </div>
+        </div>
+    </div>
+    <div class="col-1"></div>
+    <div class="col-6">
+        <h2 class="text-center">Recognition Result</h2>
+        <div class="id_text_area">
+
+        </div>
+    </div>
+    <div class="mt-5 p-4 bg-dark text-white text-center">
+        <p>&copy;2023 Jaspo-Dev</p>
+    </div>
+</body>
+
+<script>
+    document.getElementById("id_image").addEventListener("click", function() {
+        document.getElementById("id_file").click();
+    });
+
+    document.getElementById("id_file").addEventListener("change", function() {
+        let file = document.getElementById("id_file").files[0];
+
+        document.getElementById("id_img_area").src = URL.createObjectURL(file);
+    });
+</script>
+</html>
